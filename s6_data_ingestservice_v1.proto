@@ -1,0 +1,60 @@
+package s6.data.ingestservice.v1;
+
+enum ProducerType {
+	UNKNOWN_PRODUCER_TYPE = 0;
+	PLAYER = 1;
+	EMPLOYEE = 2;
+	TEST = 3;
+}
+
+enum ProducerEnv {
+	UNKNOWN_PRODUCER_ENV = 0;
+	DEV = 1;
+	LIVE = 2;
+}
+
+enum ProducerAgentType {
+	UNKNOWN_PRODUCER_AGENT = 0;
+	GAME_CLIENT_PC = 1;
+	GAME_CLIENT_IOS = 2;
+	GAME_CLIENT_ANDROID = 3;
+	GAME_SERVER_GAME = 4;
+	GAME_SERVER_META = 5;
+	DATA_PLATFORM_SERVER = 6;
+	GAME_CLIENT_SWITCH = 7;
+}
+
+message EmptyResponse {
+}
+
+message BatchResponse {
+	repeated string succeeded = 1;
+	repeated string failed = 2;
+}
+
+message ProducerAgent {
+	optional .s6.data.ingestservice.v1.ProducerAgentType agent_type = 1 [default = UNKNOWN_PRODUCER_AGENT];
+	optional string agent_version = 2;
+	optional string comment = 3;
+}
+
+message Envelope {
+	optional string event_id = 1;
+	optional string correlation_id = 2;
+	optional string event_type = 3;
+	optional uint64 event_timestamp = 4;
+	optional uint64 ingest_timestamp = 5;
+	optional .s6.data.ingestservice.v1.ProducerType producer_type = 6 [default = UNKNOWN_PRODUCER_TYPE];
+	optional .s6.data.ingestservice.v1.ProducerEnv producer_env = 7 [default = UNKNOWN_PRODUCER_ENV];
+	optional .s6.data.ingestservice.v1.ProducerAgent producer_agent = 8;
+	optional bytes payload = 15;
+}
+
+message EnvelopeBatch {
+	repeated .s6.data.ingestservice.v1.Envelope envelopes = 1;
+}
+
+service Ingest {
+	rpc SendEnvelope (.s6.data.ingestservice.v1.Envelope) returns (.s6.data.ingestservice.v1.EmptyResponse);
+	rpc SendEnvelopeBatch (.s6.data.ingestservice.v1.EnvelopeBatch) returns (.s6.data.ingestservice.v1.BatchResponse);
+}

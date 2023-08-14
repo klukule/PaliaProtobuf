@@ -1,0 +1,27 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.overflow.v1;
+
+message ItemIn {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item_stack = 200;
+}
+
+message ItemOut {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item_stack = 200;
+}
+
+message ItemDestroyed {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item_stack = 200;
+}
+
+message ItemSentToStorage {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item_stack = 200;
+}

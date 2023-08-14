@@ -1,0 +1,37 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.spawning.v1;
+
+enum ResourceSpawnReason {
+	INVALID = 0;
+	SPAWNER = 1;
+	AFTER_ACTOR_DESTROYED = 2;
+	AROUND_AOE = 3;
+}
+
+message ResourceSpawn {
+	optional .s6.palia.telem.PaliaNonPlayerEventIdentifier event_identity = 1;
+	optional string resource_type = 100;
+	optional int64 resource_id = 200;
+	optional .s6.palia.telem.Coordinates resource_location = 300;
+	optional string spawner_type = 400;
+	optional int64 spawner_id = 500;
+	optional .s6.palia.telem.spawning.v1.ResourceSpawnReason spawn_reason = 600 [default = INVALID];
+}
+
+message ResourceRemove {
+	optional .s6.palia.telem.PaliaNonPlayerEventIdentifier event_identity = 1;
+	optional string resource_type = 100;
+	optional int64 resource_id = 200;
+	optional .s6.palia.telem.Coordinates resource_location = 300;
+	optional string spawner_type = 400;
+	optional int64 spawner_id = 500;
+	optional bool despawned_from_inactivity = 600;
+}
+
+message InactiveDespawn {
+	optional .s6.palia.telem.PaliaNonPlayerEventIdentifier event_identity = 1;
+	optional string resource_type = 100;
+	optional string resource_name = 200;
+	optional .s6.palia.telem.Coordinates resource_location = 300;
+}

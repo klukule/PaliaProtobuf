@@ -1,0 +1,67 @@
+package s6.platform.telem.feedservice.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+}
+
+message CreateActivity {
+	optional .s6.platform.telem.feedservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string activity_id = 300;
+
+	oneof object {
+		.s6.platform.telem.feedservice.v1.ObjectPost post = 400;
+		.s6.platform.telem.feedservice.v1.ObjectImage image = 500;
+		.s6.platform.telem.feedservice.v1.ObjectLike like = 600;
+	}
+
+	oneof actor {
+		.s6.platform.telem.feedservice.v1.ActorPerson person = 700;
+		.s6.platform.telem.feedservice.v1.ActorCharacter character = 800;
+	}
+}
+
+message LikeActivity {
+	optional .s6.platform.telem.feedservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string activity_id = 300;
+}
+
+message UnlikeActivity {
+	optional .s6.platform.telem.feedservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string activity_id = 300;
+}
+
+message UpdateActivity {
+	optional .s6.platform.telem.feedservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string activity_id = 300;
+}
+
+message DeleteActivity {
+	optional .s6.platform.telem.feedservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string activity_id = 300;
+}
+
+message ObjectPost {
+}
+
+message ObjectImage {
+	optional string account_id = 100;
+	optional string image_id = 200;
+}
+
+message ObjectLike {
+	optional string activity_id = 100;
+}
+
+message ActorPerson {
+	optional string account_id = 100;
+}
+
+message ActorCharacter {
+	optional string id = 100;
+}

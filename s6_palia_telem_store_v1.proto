@@ -1,0 +1,29 @@
+package s6.palia.telem.store.v1;
+
+enum RequestState {
+	UNKNOWN_STATE = 0;
+	SUCCESS = 1;
+	ERRORED = 2;
+}
+
+enum PurchaseType {
+	UNKNOWN_PURCHASE_TYPE = 0;
+	SET = 1;
+	VARIANT = 2;
+	ITEM = 3;
+}
+
+message StoreViewed {
+	optional string account_id = 1;
+	optional string campaign_id = 100;
+}
+
+message Purchase {
+	optional string account_id = 1;
+	optional string store_id = 101;
+	optional .s6.palia.telem.store.v1.PurchaseType purchase_type = 200 [default = UNKNOWN_PURCHASE_TYPE];
+	optional int32 original_price = 300;
+	optional int32 discounted_price = 400;
+	repeated string content_ids = 600;
+	optional .s6.palia.telem.store.v1.RequestState request_state = 700 [default = UNKNOWN_STATE];
+}

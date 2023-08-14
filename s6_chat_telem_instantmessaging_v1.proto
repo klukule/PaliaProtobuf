@@ -1,0 +1,45 @@
+package s6.chat.telem.instantmessaging.v1;
+
+enum MessageType {
+	Text = 0;
+	GeographicLocation = 1;
+	Emoji = 2;
+	Custom = 3;
+	Sound = 4;
+	Image = 5;
+	File = 6;
+	Video = 7;
+}
+
+message ChatMessage {
+	optional string from = 100;
+	optional string to = 200;
+	optional uint32 message_sequence = 300;
+	optional uint64 message_time = 400;
+	optional string message_key = 500;
+	optional bool online_only = 600;
+	optional .s6.chat.telem.instantmessaging.v1.MessageType messageType = 700 [default = Text];
+	optional string message_content = 800;
+}
+
+message GroupChatMessage {
+	optional string group_id = 100;
+	optional string group_type = 200;
+	optional string operator_account = 400;
+	optional uint32 message_random = 500;
+	optional bool online_only = 600;
+	optional .s6.chat.telem.instantmessaging.v1.MessageType messageType = 700 [default = Text];
+	optional string message_content = 800;
+
+	oneof _from_account {
+		string from_account = 300;
+	}
+
+	oneof _event_time {
+		uint64 event_time = 900;
+	}
+
+	oneof _message_priority {
+		string message_priority = 1000;
+	}
+}

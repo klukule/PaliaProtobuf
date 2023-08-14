@@ -1,0 +1,19 @@
+package s6.platform.telem.subscriptionservice.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+	BLOCKED = 2;
+}
+
+message CreateSubscription {
+	optional .s6.platform.telem.subscriptionservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string subscription_account_id = 300;
+}
+
+message DeleteSubscription {
+	optional .s6.platform.telem.subscriptionservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string subscription_account_id = 300;
+}

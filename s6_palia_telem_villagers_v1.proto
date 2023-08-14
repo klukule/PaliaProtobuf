@@ -1,0 +1,79 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.villagers.v1;
+
+message RelationshipChange {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.VillagerCoreIdentifier villager_core = 250;
+	optional .s6.palia.telem.RelationshipType relationship_type = 300 [default = INVALID];
+	optional int64 delta = 400;
+	optional .s6.palia.telem.QuestRewardSource source = 500 [default = UNSPECIFIED];
+}
+
+message Gift {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.VillagerIdentifier villager = 200;
+	optional .s6.palia.telem.VillagerCoreIdentifier villager_core = 250;
+	optional .s6.palia.telem.ItemStack item = 300;
+	optional .s6.palia.telem.GiftPreferenceTier preference_tier = 400 [default = GIFT_TYPE_UNKNOWN];
+}
+
+message QuestStarted {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string quest_id = 200;
+	repeated .s6.palia.telem.ItemStack item_stacks_gained = 300;
+	repeated .s6.palia.telem.VitalAmount vital_amounts_gained = 400;
+}
+
+message QuestStepCompleted {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string quest_id = 200;
+	optional int32 step_num = 250;
+	repeated .s6.palia.telem.ItemStack item_stacks_lost = 300;
+	repeated .s6.palia.telem.ItemStack item_stacks_gained = 400;
+	repeated .s6.palia.telem.VitalAmount vital_amounts_lost = 500;
+	repeated .s6.palia.telem.VitalAmount vital_amounts_gained = 600;
+	optional .s6.palia.telem.QuestCompletedState state = 700 [default = QUEST_COMPLETED_STATE_UNKNOWN];
+}
+
+message QuestCompleted {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string quest_id = 200;
+}
+
+message DialogueOptionSelected {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string dialogue_id = 200;
+	optional int64 start_time = 300;
+	optional .s6.palia.telem.VillagerCoreIdentifier villager_core = 450;
+	optional string dialogue_choice = 500;
+	repeated string dialogue_options = 600;
+}
+
+message VillagerBrokenUpWith {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional int64 breakup_time = 200;
+	optional .s6.palia.telem.VillagerCoreIdentifier villager_core = 300;
+	optional int32 romance_value = 450;
+}
+
+message MailRead {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string mail_name = 200;
+}
+
+message RelationshipLevelUp {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.RelationshipType relationship_type = 200 [default = INVALID];
+	optional int64 new_level = 300;
+	optional .s6.palia.telem.VillagerCoreIdentifier villager_core = 450;
+	optional .s6.palia.telem.QuestRewardSource source = 500 [default = UNSPECIFIED];
+}

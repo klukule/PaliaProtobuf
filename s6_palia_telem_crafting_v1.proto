@@ -1,0 +1,122 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.crafting.v1;
+
+enum ComplexRecipeCookingResult {
+	COOKING_UNKNOWN_RESULT = 0;
+	COOKING_FAILURE = 1;
+	COOKING_SUCCESS = 2;
+}
+
+enum ComplexRecipeCookingSubrecipeResult {
+	COOKING_SUBRECIPE_UNKNOWN_RESULT = 0;
+	COOKING_SUBRECIPE_FAILURE = 1;
+	COOKING_SUBRECIPE_SUCCESS = 2;
+}
+
+enum ComplexRecipeCookingMinigameResult {
+	COOKING_MINIGAME_UNKNOWN_RESULT = 0;
+	COOKING_MINIGAME_CANCEL = 1;
+	COOKING_MINIGAME_TIMEOUT = 2;
+	COOKING_MINIGAME_SUCCESS = 3;
+}
+
+enum RecipeLearnedFrom {
+	INVALID = 0;
+	PURCHASED_AT_VILLAGER_STORE = 1;
+	CHEATS = 2;
+	QUEST_REWARD = 3;
+	INSPIRATION = 4;
+	LEVEL_UP = 5;
+}
+
+message Craft {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.RecipeIdentifier recipe = 200;
+	optional string tool_used = 300;
+	optional int64 start_time = 430;
+	optional int64 end_time = 470;
+	optional int64 experience = 600;
+	optional .s6.palia.telem.SkillType skill_type = 700 [default = UNKNOWN_SKILL_TYPE];
+	repeated .s6.palia.telem.ItemStack item_stack_gained = 900;
+	repeated .s6.palia.telem.ItemStack item_stack_lost = 1000;
+}
+
+message RecipeInitiator {
+	optional string account_id = 1;
+	optional string character_id = 2;
+}
+
+message Craft_Cooking_ComplexRecipeFinished {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.RecipeIdentifier recipe = 300;
+	optional .s6.palia.telem.SkillType skill_type = 400 [default = UNKNOWN_SKILL_TYPE];
+	optional string cooking_session_id = 500;
+	optional int64 start_time = 600;
+	optional int64 end_time = 700;
+	optional int64 recipe_time = 800;
+	optional int64 experience = 900;
+	repeated .s6.palia.telem.ItemStack item_stack_gained = 1000;
+	repeated .s6.palia.telem.ItemStack item_stack_lost = 1100;
+	optional .s6.palia.telem.crafting.v1.ComplexRecipeCookingResult outcome = 1200 [default = COOKING_UNKNOWN_RESULT];
+	optional int64 contributors = 1300;
+	optional .s6.palia.telem.crafting.v1.RecipeInitiator recipe_initiator = 1400;
+}
+
+message Craft_Cooking_ComplexSubRecipeFinished {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.RecipeIdentifier subrecipe = 300;
+	optional string subrecipe_id = 400;
+	optional string cooking_session_id = 500;
+	optional int64 start_time = 600;
+	optional int64 end_time = 700;
+	optional .s6.palia.telem.crafting.v1.ComplexRecipeCookingSubrecipeResult outcome = 800 [default = COOKING_SUBRECIPE_UNKNOWN_RESULT];
+	optional int64 contributors = 900;
+}
+
+message ComplexRecipeMinigame {
+	optional int64 id = 1;
+	optional string name = 100;
+}
+
+message Craft_Cooking_ComplexMinigameFinished {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.RecipeIdentifier recipe = 300;
+	optional string minigame_id = 400;
+	optional string crafter_id = 500;
+	optional string subrecipe_id = 600;
+	optional string cooking_session_id = 700;
+	optional .s6.palia.telem.crafting.v1.ComplexRecipeMinigame minigame = 800;
+	optional string tool_used = 900;
+	optional int64 start_time = 1000;
+	optional int64 end_time = 1100;
+	optional int32 mistakes = 1200;
+	optional .s6.palia.telem.crafting.v1.ComplexRecipeCookingMinigameResult outcome = 1300 [default = COOKING_MINIGAME_UNKNOWN_RESULT];
+}
+
+message RecipeLearned {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.RecipeIdentifier recipe = 200;
+	optional .s6.palia.telem.crafting.v1.RecipeLearnedFrom learned_from = 300 [default = INVALID];
+	optional .s6.palia.telem.QuestRewardSource quest_reward_source = 400 [default = UNSPECIFIED];
+	optional string villager_store_name = 500;
+}
+
+message Inspiration {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.RecipeIdentifier recipe_created = 300;
+	optional .s6.palia.telem.RecipeIdentifier recipe_slot_a = 400;
+	optional .s6.palia.telem.RecipeIdentifier recipe_slot_b = 500;
+	optional .s6.palia.telem.RecipeIdentifier recipe_slot_c = 600;
+	optional .s6.palia.telem.RecipeIdentifier recipe_chosen = 700;
+}

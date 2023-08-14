@@ -1,0 +1,31 @@
+package s6.platform.telem.imageservice.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+}
+
+enum ImageType {
+	png = 0;
+	jpg = 1;
+}
+
+message CreateImage {
+	optional .s6.platform.telem.imageservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string image_id = 300;
+	optional .s6.platform.telem.imageservice.v1.ImageType image_type = 400 [default = png];
+}
+
+message UpdateImage {
+	optional .s6.platform.telem.imageservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string image_id = 300;
+	optional .s6.platform.telem.imageservice.v1.ImageType image_type = 400 [default = png];
+}
+
+message DeleteImage {
+	optional .s6.platform.telem.imageservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string image_id = 300;
+}

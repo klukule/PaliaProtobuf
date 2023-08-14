@@ -1,0 +1,16 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.accomplishments.v1;
+
+message AccomplishmentAchieved {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.accomplishments.v1.AccomplishmentIdentifier accomplishment_id = 200;
+	repeated .s6.palia.telem.ItemStack item_stack_gained = 300;
+	repeated .s6.palia.telem.CurrencyAmount currency_amount_gained = 400;
+}
+
+message AccomplishmentIdentifier {
+	optional string id = 100;
+	optional string name = 200;
+}

@@ -1,0 +1,34 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.fishing.v1;
+
+enum FishingMiniGameResult {
+	NONE = 0;
+	SUCCESS = 1;
+	FAILURE = 2;
+	CANCELLED = 3;
+	CANCELLED_CAST = 4;
+	EMPTY_HANDED = 5;
+}
+
+message FishingFinished {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional int32 experience = 100;
+	optional string fish_name = 200;
+	optional int32 fish_stars = 300;
+	optional int32 start_rod_health = 400;
+	optional int32 end_rod_health = 500;
+	optional int32 start_fish_health = 600;
+	optional int32 end_fish_health = 700;
+	optional .s6.palia.telem.fishing.v1.FishingMiniGameResult result = 800 [default = NONE];
+	optional .s6.palia.telem.PalianTimeOfDay start_time_of_day = 900;
+	optional .s6.palia.telem.PalianTimeOfDay end_time_of_day = 1000;
+	optional .s6.palia.telem.LevelLocation level_location = 1100;
+	optional string bait_used = 1200;
+	optional string rod_used = 1300;
+	optional string attachment_used = 1400;
+	optional string water_type = 1500;
+	optional string water_name = 1600;
+	optional bool player_earned_multiplayer_credit = 1700;
+	repeated .s6.palia.telem.ItemStack items_received = 1800;
+}

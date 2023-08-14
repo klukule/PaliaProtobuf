@@ -1,0 +1,11 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.insectcatching.v1;
+
+message NetSwing {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string tool_used = 200;
+	optional string hit_actor_according_to_client = 300;
+	optional bool hit_creature = 400;
+}

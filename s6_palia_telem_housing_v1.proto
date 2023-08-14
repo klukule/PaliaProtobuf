@@ -1,0 +1,70 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.housing.v1;
+
+enum EditAccessLevel {
+	EDIT_ACCESS_LEVEL_UNKNOWN = 0;
+	EDIT_ACCESS_LEVEL_OWNER = 1;
+	EDIT_ACCESS_LEVEL_VISITOR = 2;
+	EDIT_ACCESS_LEVEL_NO_ENTRY = 3;
+	EDIT_ACCESS_LEVEL_CONTRACTOR = 4;
+	EDIT_ACCESS_LEVEL_EDITOR = 5;
+	EDIT_ACCESS_LEVEL_BFF = 6;
+}
+
+enum SecurityLevel {
+	SECURITY_LEVEL_UNKNOWN = 0;
+	SECURITY_LEVEL_CLOSED = 1;
+	SECURITY_LEVEL_OPEN = 2;
+	SECURITY_LEVEL_FRIEND = 3;
+	SECURITY_LEVEL_REQUEST = 4;
+}
+
+message ItemPlaced {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item = 200;
+	optional .s6.palia.telem.Coordinates coordinates = 300;
+	optional .s6.palia.telem.InstanceLocation instance_location = 400;
+	optional .s6.palia.telem.DecorItemId item_unique_id = 500;
+	optional int32 slot_id = 600;
+}
+
+message ItemRemoved {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item = 200;
+	optional .s6.palia.telem.Coordinates coordinates = 300;
+	optional .s6.palia.telem.InstanceLocation instance_location = 400;
+	optional .s6.palia.telem.DecorItemId item_unique_id = 500;
+	optional int32 slot_id = 600;
+}
+
+message EditAccessChange {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional string plot_owner_character_id = 100;
+	optional string target_character_id = 200;
+	optional .s6.palia.telem.housing.v1.EditAccessLevel permission_granted = 300 [default = EDIT_ACCESS_LEVEL_UNKNOWN];
+	optional string instance_id = 400;
+	optional int32 slot_id = 500;
+}
+
+message HousingPlotCreated {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional string instance_id = 100;
+}
+
+message SecurityLevelChange {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional string instance_id = 100;
+	optional int32 slot_id = 200;
+	optional .s6.palia.telem.housing.v1.SecurityLevel security_level = 300 [default = SECURITY_LEVEL_UNKNOWN];
+}
+
+message PlotKick {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional string plot_owner_character_id = 100;
+	optional string target_character_id = 200;
+	optional string instance_id = 300;
+	optional int32 slot_id = 400;
+}

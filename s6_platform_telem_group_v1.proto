@@ -1,0 +1,164 @@
+package s6.platform.telem.group.v1;
+
+enum RequestState {
+	UNKNOWN_STATE = 0;
+	ERRORED = 1;
+	SUCCESS = 2;
+}
+
+enum GroupType {
+	UNKNOWN_GROUP_TYPE = 0;
+	PARTY = 1;
+	NEIGHBORHOOD = 2;
+}
+
+enum InviteLevel {
+	UNKNOWN_INVITE_LEVEL = 0;
+	OWNER_INVITE_ONLY = 1;
+	ADMIN_INVITE_ONLY = 2;
+	OPEN = 3;
+}
+
+enum ApplicationLevel {
+	UNKNOWN_APPLICATION_LEVEL = 0;
+	CLOSED = 1;
+	OWNER_APPROVAL_REQUIRED = 2;
+	ADMIN_APPROVAL_REQUIRED = 3;
+	AUTOACCEPT = 4;
+}
+
+enum RoleType {
+	UNKNOWN_ROLE = 0;
+	NONE = 1;
+	ADMIN = 2;
+}
+
+message Create {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string owner_account_id = 300;
+	optional .s6.platform.telem.group.v1.InviteLevel invite_level = 500 [default = UNKNOWN_INVITE_LEVEL];
+	optional .s6.platform.telem.group.v1.ApplicationLevel application_level = 600 [default = UNKNOWN_APPLICATION_LEVEL];
+	optional string name = 700;
+	optional string description = 800;
+	optional string motto = 900;
+
+	oneof _group_id {
+		string group_id = 400;
+	}
+}
+
+message Update {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 400;
+	optional string requestor_account_id = 700;
+
+	oneof _owner_account_id {
+		string owner_account_id = 300;
+	}
+
+	oneof _description {
+		string description = 500;
+	}
+
+	oneof _motto {
+		string motto = 600;
+	}
+}
+
+message Delete {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+}
+
+message Leave {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+}
+
+message Kicked {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string kicked_account_id = 500;
+}
+
+message InviteSent {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string invited_account_id = 500;
+	optional .s6.platform.telem.group.v1.RoleType invited_account_role = 600 [default = UNKNOWN_ROLE];
+}
+
+message InviteAccepted {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string account_id = 400;
+}
+
+message InviteDeclined {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string account_id = 400;
+}
+
+message InviteRevoked {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string revoked_account_id = 500;
+}
+
+message ApplicationRequested {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+}
+
+message ApplicationRescinded {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string rescinded_account_id = 500;
+}
+
+message ApplicationApproved {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string approved_account_id = 500;
+}
+
+message ApplicationDenied {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string denied_account_id = 500;
+}
+
+message MemberUpdated {
+	optional .s6.platform.telem.group.v1.RequestState request_state = 100 [default = UNKNOWN_STATE];
+	optional .s6.platform.telem.group.v1.GroupType group_type = 200 [default = UNKNOWN_GROUP_TYPE];
+	optional string group_id = 300;
+	optional string requestor_account_id = 400;
+	optional string account_id_changed = 500;
+
+	oneof _new_role {
+		.s6.platform.telem.group.v1.RoleType new_role = 600 [default = UNKNOWN_ROLE];
+	}
+}

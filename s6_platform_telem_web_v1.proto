@@ -1,0 +1,6 @@
+package s6.platform.telem.web.v1;
+
+message Visit {
+	optional string account_id = 100;
+	optional string destination = 200;
+}

@@ -1,0 +1,8 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.stamina.v1;
+
+message StaminaDepleted {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+}

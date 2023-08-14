@@ -1,0 +1,36 @@
+package s6.platform.telem.referrals.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+}
+
+message Create {
+	optional .s6.platform.telem.referrals.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string referral_code = 300;
+	optional int32 remaining_referrals = 400;
+}
+
+message Claim {
+	optional .s6.platform.telem.referrals.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string claimed_account_id = 200;
+	optional string referral_code = 300;
+
+	oneof _referral_account_id {
+		string referral_account_id = 400;
+	}
+}
+
+message Reset {
+	optional .s6.platform.telem.referrals.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string referral_code = 300;
+
+	oneof _claimed_account_id {
+		string claimed_account_id = 200;
+	}
+
+	oneof _referral_account_id {
+		string referral_account_id = 400;
+	}
+}

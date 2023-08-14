@@ -1,0 +1,9 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.inventory.v1;
+
+message ItemsDiscarded {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item_stack = 200;
+}

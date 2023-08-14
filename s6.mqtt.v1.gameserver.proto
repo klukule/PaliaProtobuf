@@ -1,0 +1,87 @@
+package s6.mqtt.v1.gameserver;
+
+message Player {
+	optional string account_id = 1;
+	optional string character_id = 2;
+}
+
+message PlayerJoined {
+	optional string server_id = 1;
+	optional .s6.mqtt.v1.gameserver.Player player = 3;
+
+	oneof _space_id {
+		string space_id = 2;
+	}
+}
+
+message PlayerLeft {
+	optional string server_id = 1;
+	optional .s6.mqtt.v1.gameserver.Player player = 3;
+
+	oneof _space_id {
+		string space_id = 2;
+	}
+}
+
+message TicketRejected {
+	optional string ticket_id = 1;
+	optional string server_id = 2;
+	optional .s6.mqtt.v1.gameserver.Player player = 4;
+	optional string reason = 5;
+
+	oneof _space_id {
+		string space_id = 3;
+	}
+}
+
+message ConnectionInfo {
+	optional string addr = 1;
+	optional uint32 port = 2;
+	optional uint32 beacon_port = 3;
+}
+
+message ServerReady {
+	optional string server_id = 1;
+	optional string server_type = 2;
+	optional string version = 3;
+	optional .s6.mqtt.v1.gameserver.ConnectionInfo connection_info = 4;
+	optional string signing_key = 5;
+	optional int32 max_capacity = 6;
+	optional string region = 7;
+	optional int32 soft_cap = 8;
+}
+
+message ServerOnline {
+	optional string server_id = 1;
+	optional string server_type = 2;
+	optional string version = 3;
+}
+
+message ServerDisconnected {
+	optional string server_id = 1;
+}
+
+message ServerState {
+	optional string server_id = 1;
+	repeated string spaces = 2;
+	repeated .s6.mqtt.v1.gameserver.Player players = 3;
+}
+
+message ServerReserved {
+	optional string server_id = 1;
+	optional uint32 expiration = 2;
+}
+
+message ServerRegistrationRequested {
+	optional string server_id = 1;
+}
+
+message SpaceLoaded {
+	optional string server_id = 1;
+	optional string space_id = 2;
+}
+
+message SpaceUnloaded {
+	optional string server_id = 1;
+	optional string space_id = 2;
+}

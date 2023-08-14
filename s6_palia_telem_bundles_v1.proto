@@ -1,0 +1,21 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.bundles.v1;
+
+message BundleIdentifier {
+	optional int64 id = 1;
+	optional string name = 2;
+}
+
+message ItemPlacedInBundle {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.bundles.v1.BundleIdentifier bundle = 100;
+	optional .s6.palia.telem.bundles.v1.BundleIdentifier sub_bundle = 200;
+	optional .s6.palia.telem.ItemStack item_stack_lost = 300;
+}
+
+message BundleCompleted {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.bundles.v1.BundleIdentifier bundle = 100;
+	optional .s6.palia.telem.bundles.v1.BundleIdentifier sub_bundle = 200;
+}

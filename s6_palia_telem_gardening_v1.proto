@@ -1,0 +1,70 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.gardening.v1;
+
+message Fertilize {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional string plot_id = 300;
+	optional int32 tile_number = 400;
+	optional .s6.palia.telem.ItemStack seed_item_stack = 500;
+	optional int64 plant_id = 600;
+	optional .s6.palia.telem.ItemStack fertilizer_item_stack = 700;
+	optional .s6.palia.telem.ItemStack replaced_fertilizer_item_stack = 800;
+}
+
+message Plant {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.ItemStack item = 200;
+	optional .s6.palia.telem.InstanceLocation instance_location = 300;
+	optional string plot_id = 400;
+	optional int32 tile_number = 500;
+	optional int64 plant_id = 600;
+}
+
+message Till {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.PlayerTool tool_used = 200;
+	optional .s6.palia.telem.InstanceLocation instance_location = 300;
+	optional string plot_id = 400;
+	optional int32 tile_number = 500;
+}
+
+message WaterCrop {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.PlayerTool tool_used = 200;
+	optional .s6.palia.telem.InstanceLocation instance_location = 400;
+	optional string plot_id = 500;
+	optional int32 tile_number = 600;
+	optional .s6.palia.telem.ItemStack seed_item_stack = 700;
+	optional int64 plant_id = 800;
+}
+
+message WaterRefill {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.PlayerTool tool_used = 200;
+}
+
+message Harvest {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	repeated .s6.palia.telem.ItemStack items = 200;
+	optional .s6.palia.telem.InstanceLocation instance_location = 300;
+	optional string plot_id = 400;
+	optional int32 tile_number = 500;
+	optional int64 plant_id = 600;
+	optional .s6.palia.telem.ItemStack seed_item_stack = 700;
+	repeated .s6.palia.telem.gardening.v1.GardeningBuffs fertilizer_buffs = 800;
+	repeated .s6.palia.telem.gardening.v1.GardeningBuffs adjacency_buffs = 900;
+}
+
+message GardeningBuffs {
+	optional int32 id = 100;
+	optional string name = 200;
+	optional int32 instances_applied = 300;
+}

@@ -1,0 +1,48 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.gamesession.v0;
+
+message End {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+}
+
+message Start {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string os_version = 200;
+	optional string cpu_version = 300;
+	optional string gpu_version = 400;
+}
+
+message Snapshot {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional float frame_time = 200;
+	optional float frame_time_min = 210;
+	optional float frame_time_max = 220;
+	optional float frame_time_average = 230;
+	optional float game_thread_time = 300;
+	optional float game_thread_time_min = 310;
+	optional float game_thread_time_max = 320;
+	optional float game_thread_time_average = 330;
+	optional float render_thread_time = 400;
+	optional float render_thread_time_min = 410;
+	optional float render_thread_time_max = 420;
+	optional float render_thread_time_average = 430;
+	optional float gpu_frame_time = 500;
+	optional float gpu_frame_time_min = 510;
+	optional float gpu_frame_time_max = 520;
+	optional float gpu_frame_time_average = 530;
+	optional float rhit_time = 600;
+	optional float rhit_time_min = 610;
+	optional float rhit_time_max = 620;
+	optional float rhit_time_average = 630;
+	optional float input_latency_time = 700;
+	optional float input_latency_time_min = 710;
+	optional float input_latency_time_max = 720;
+	optional float input_latency_time_average = 730;
+	optional bool has_timing_info = 750;
+	optional float fps = 800;
+	optional int64 ping = 900;
+}

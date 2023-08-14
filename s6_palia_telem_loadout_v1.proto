@@ -1,0 +1,15 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.loadout.v1;
+
+message LoadoutSlotChange {
+	optional string slot_name = 100;
+	optional string prev_item_id = 200;
+	optional string new_item_id = 300;
+}
+
+message LoadoutChanged {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional int64 body_type = 100;
+	repeated .s6.palia.telem.loadout.v1.LoadoutSlotChange loadout = 200;
+}

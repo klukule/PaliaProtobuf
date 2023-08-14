@@ -1,0 +1,20 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.gather.v0;
+
+message WorldItemGathered {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	repeated .s6.palia.telem.ItemStack item_stack = 100;
+	repeated .s6.palia.telem.VitalAmount vital_stack = 200;
+	optional .s6.palia.telem.LevelLocation level_location = 300;
+	optional .s6.palia.telem.SkillAmount skill_amount = 400;
+	optional string actor_id = 500;
+}
+
+message Loot {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string resource = 200;
+	repeated .s6.palia.telem.ItemStack items = 300;
+	optional string actor_id = 350;
+}

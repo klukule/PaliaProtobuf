@@ -1,0 +1,22 @@
+import "s6.mqtt.v1.accounts.proto";
+import "s6.mqtt.v1.gameserver.proto";
+
+package s6.mqtt.v1.base;
+
+message Wrapper {
+	oneof data {
+		.s6.mqtt.v1.accounts.KickPlayer kick_player = 1;
+		.s6.mqtt.v1.gameserver.PlayerJoined player_joined = 2;
+		.s6.mqtt.v1.gameserver.PlayerLeft player_left = 3;
+		.s6.mqtt.v1.gameserver.TicketRejected ticket_rejected = 4;
+		.s6.mqtt.v1.gameserver.ServerReady server_ready = 5;
+		.s6.mqtt.v1.gameserver.ServerOnline server_online = 6;
+		.s6.mqtt.v1.gameserver.ServerDisconnected server_disconnected = 7;
+		.s6.mqtt.v1.gameserver.ServerState server_state = 8;
+		.s6.mqtt.v1.gameserver.SpaceLoaded space_loaded = 9;
+		.s6.mqtt.v1.gameserver.SpaceUnloaded space_unloaded = 10;
+		.s6.mqtt.v1.gameserver.ServerReserved server_reserved = 11;
+		.s6.mqtt.v1.gameserver.ServerRegistrationRequested server_registration_requested = 12;
+		.s6.mqtt.v1.accounts.KickAllPlayers kick_all_players = 13;
+	}
+}

@@ -1,0 +1,9 @@
+package s6.mqtt.v1.accounts;
+
+message KickPlayer {
+	optional string account_id = 1;
+	optional string character_id = 2;
+}
+
+message KickAllPlayers {
+}

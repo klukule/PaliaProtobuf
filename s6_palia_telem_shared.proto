@@ -1,0 +1,186 @@
+package s6.palia.telem;
+
+enum SkillType {
+	UNKNOWN_SKILL_TYPE = 0;
+	FISHING = 1;
+	COOKING = 2;
+	ALCHEMY = 3;
+	GARDENING = 4;
+	BLACKSMITHING = 5;
+	ANIMAL_HUSBANDRY = 6;
+	MINING = 7;
+	HUNTING = 8;
+	COMBAT = 9;
+	BUG_CATCHING = 10;
+	LUMBERJACKING = 11;
+	MASTER = 12;
+	FORAGING = 13;
+	FURNITURE_MAKING = 14;
+}
+
+enum VitalType {
+	UNKNOWN_VITAL_TYPE = 0;
+	COINS = 1;
+	COMMUNITY_POINTS = 2;
+	STAMINA = 3;
+	HEALTH = 4;
+	PREMIUM_CURRENCY = 5;
+	MEDAL_FISHING = 6;
+	FOCUS = 7;
+	RESTED_FOCUS = 8;
+}
+
+enum QuestRewardSource {
+	UNSPECIFIED = 0;
+	CRAFTED = 1;
+	GATHERED = 2;
+	CONSUMPTION = 3;
+	QUEST = 4;
+	DIALOGUE = 5;
+	GIFT = 6;
+	MAIL = 7;
+	PURCHASE = 8;
+	CHEAT = 9;
+	BOOK = 10;
+	BUNDLE = 11;
+	CHALLENGE = 12;
+	GARDEN = 13;
+	SUBGAME = 14;
+	ITEM_PICKUP = 15;
+	DATA_CORRECTION = 16;
+}
+
+enum PalianTimeOfDayPeriod {
+	UNKNOWN_TOD_TYPE = 0;
+	MORNING = 1;
+	DAY = 2;
+	EVENING = 3;
+	NIGHT = 4;
+}
+
+enum RelationshipType {
+	INVALID = 0;
+	FRIENDSHIP = 1;
+	ROMANCE = 2;
+}
+
+enum GiftPreferenceTier {
+	GIFT_TYPE_UNKNOWN = 0;
+	GIFT_TYPE_NEUTRAL = 1;
+	GIFT_TYPE_LIKED = 2;
+	GIFT_TYPE_LOVED = 3;
+	GIFT_TYPE_ROMANCE = 4;
+}
+
+enum QuestCompletedState {
+	QUEST_COMPLETED_STATE_UNKNOWN = 0;
+	QUEST_COMPLETED_STATE_IN_PROGRESS = 1;
+	QUEST_COMPLETED_STATE_COMPLETED = 2;
+}
+
+message LevelLocation {
+	optional string map_name = 1;
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+}
+
+message InstanceLocation {
+	optional string instance_id = 1;
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+	optional string zone_name = 5;
+}
+
+message Coordinates {
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+}
+
+message SkillAmount {
+	optional int64 amount = 1;
+	optional .s6.palia.telem.SkillType type = 2 [default = UNKNOWN_SKILL_TYPE];
+}
+
+message VitalAmount {
+	optional int64 amount = 1;
+	optional .s6.palia.telem.VitalType type = 2 [default = UNKNOWN_VITAL_TYPE];
+}
+
+message CurrencyAmount {
+	optional int64 amount = 1;
+	optional string type = 2;
+}
+
+message ItemStack {
+	optional int64 id = 1;
+	optional string name = 2;
+	optional int32 quality = 3;
+	optional int32 amount = 4;
+	optional int32 variant = 5;
+}
+
+message Entitlement {
+	optional string guid = 1;
+	optional string name = 2;
+}
+
+message DecorItemId {
+	optional string id = 1;
+}
+
+message PlayerTool {
+	optional int64 id = 1;
+	optional string name = 2;
+	optional int32 use_amount_left = 3;
+}
+
+message PalianTimeOfDay {
+	optional .s6.palia.telem.PalianTimeOfDayPeriod period = 1 [default = UNKNOWN_TOD_TYPE];
+	optional float days_since_epoch = 2;
+}
+
+message PaliaServerEventIdentifier {
+	optional string event_id = 1;
+	optional string session_id = 2;
+	optional string server_id = 3;
+	optional string account_id = 4;
+	optional string character_id = 5;
+	optional uint64 game_timestamp = 6;
+	optional .s6.palia.telem.PalianTimeOfDay time_of_day = 7;
+}
+
+message PaliaNonPlayerEventIdentifier {
+	optional string event_id = 1;
+	optional string server_id = 3;
+	optional uint64 game_timestamp = 6;
+	optional .s6.palia.telem.PalianTimeOfDay time_of_day = 7;
+	optional string map_name = 8;
+}
+
+message RecipeIdentifier {
+	optional int64 id = 1;
+	optional string name = 2;
+}
+
+message VillagerIdentifier {
+	optional int64 id = 1;
+	optional string name = 2;
+}
+
+message VillagerCoreIdentifier {
+	optional int64 id = 1;
+	optional string name = 2;
+}
+
+message PlayerBuffs {
+	optional int32 id = 1;
+	optional string name = 2;
+	optional int32 level = 3;
+}
+
+message LimitedEventId {
+	optional string id = 1;
+}

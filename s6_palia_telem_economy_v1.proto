@@ -1,0 +1,26 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.economy.v1;
+
+message ItemSoldTransaction {
+	optional .s6.palia.telem.ItemStack item_stack_lost = 1;
+	optional .s6.palia.telem.VitalAmount vital_amount_gained = 2;
+}
+
+message ItemSold {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string store_name = 200;
+	repeated .s6.palia.telem.economy.v1.ItemSoldTransaction transactions = 300;
+}
+
+message ItemPurchase {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string store_name = 200;
+	optional .s6.palia.telem.ItemStack item_stack_gained = 300;
+	repeated .s6.palia.telem.ItemStack additional_item_stacks_gained = 400;
+	repeated .s6.palia.telem.ItemStack item_stacks_lost = 500;
+	repeated .s6.palia.telem.VitalAmount vital_amounts_lost = 600;
+	repeated .s6.palia.telem.CurrencyAmount currency_amount_lost = 700;
+}

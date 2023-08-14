@@ -1,0 +1,11 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.worlditem.v1;
+
+message ItemPlaced {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.Coordinates item_location = 300;
+	optional .s6.palia.telem.ItemStack item_stack = 400;
+}

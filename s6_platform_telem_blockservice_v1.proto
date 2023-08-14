@@ -1,0 +1,18 @@
+package s6.platform.telem.blockservice.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+}
+
+message CreateBlock {
+	optional .s6.platform.telem.blockservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string block_account_id = 300;
+}
+
+message DeleteBlock {
+	optional .s6.platform.telem.blockservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string block_account_id = 300;
+}

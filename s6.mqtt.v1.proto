@@ -1,0 +1,12 @@
+package s6.mqtt.v1;
+
+message Wrapper {
+	oneof data {
+		.s6.mqtt.v1.KickPlayer kick_player = 1;
+	}
+}
+
+message KickPlayer {
+	optional string account_id = 1;
+	optional string character_id = 2;
+}

@@ -1,0 +1,11 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.newsinbox.v1;
+
+message RewardGranted {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 100;
+	optional string reward_guid = 200;
+	optional string item_id = 300;
+	optional int32 item_quantity = 400;
+	optional uint64 added_to_user_timestamp = 500;
+}

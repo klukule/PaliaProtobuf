@@ -1,0 +1,24 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.hunting.v1;
+
+message ArrowShot {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string tool_used = 200;
+	optional string ammo_type = 300;
+	optional string hit_actor_according_to_server = 400;
+	optional string hit_actor_according_to_client = 500;
+	optional bool hit_creature = 600;
+}
+
+message KillCreature {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string creature_killer = 200;
+	optional string tool_used = 300;
+	optional string ammo_type = 400;
+	optional .s6.palia.telem.Coordinates creature_location = 500;
+	optional string creature_name = 600;
+	optional int64 experience = 700;
+}

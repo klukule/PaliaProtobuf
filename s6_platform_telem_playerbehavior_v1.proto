@@ -1,0 +1,35 @@
+package s6.platform.telem.playerbehavior.v1;
+
+enum ReportType {
+	UNKNOWN_REPORT_TYPE = 0;
+	NEGATIVE = 1;
+	POSITIVE = 2;
+}
+
+enum SourceComponent {
+	UNKNOWN_SOURCE_COMPONENT = 0;
+	SOCIAL_PANEL = 1;
+	CHARACTER_CARD = 2;
+	CHAT = 3;
+}
+
+message Report {
+	optional string id = 100;
+	optional .s6.platform.telem.playerbehavior.v1.SourceComponent source_component = 200 [default = UNKNOWN_SOURCE_COMPONENT];
+	optional string reporter_account_id = 300;
+	optional string reporter_character_id = 301;
+	optional string target_account_id = 400;
+	optional string target_character_id = 401;
+	optional uint64 created_at_millis = 500;
+	optional .s6.platform.telem.playerbehavior.v1.ReportType report_type = 600 [default = UNKNOWN_REPORT_TYPE];
+	optional string category = 700;
+	repeated .s6.platform.telem.playerbehavior.v1.Message messages = 800;
+	optional string comment = 900;
+}
+
+message Message {
+	optional string sender_account_id = 100;
+	optional string channel_id = 200;
+	optional string content = 300;
+	optional uint64 created_at_millis = 400;
+}

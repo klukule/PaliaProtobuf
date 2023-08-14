@@ -1,0 +1,57 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.character.v1;
+
+message VitalChange {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.VitalType vital_type = 200 [default = UNKNOWN_VITAL_TYPE];
+	optional int64 previous_amount = 300;
+	optional int64 new_amount = 400;
+}
+
+message SkillLevelUp {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.SkillType skill_type = 200 [default = UNKNOWN_SKILL_TYPE];
+	optional int64 new_level = 300;
+}
+
+message UnstuckUsage {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional int64 cooldown_remaining_at_request = 200;
+	optional int64 cooldown_applied = 300;
+}
+
+message SkillChange {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.SkillType skill_type = 200 [default = UNKNOWN_SKILL_TYPE];
+	optional int64 xp_gained = 300;
+	optional int64 focus_used = 400;
+	optional int64 prior_skill_level = 500;
+	optional int64 prior_skill_xp_on_level = 600;
+	optional int64 new_skill_level = 700;
+	optional int64 new_skill_xp_on_level = 800;
+	optional int64 prior_character_level = 900;
+	optional int64 prior_character_xp_on_level = 1000;
+	optional int64 new_character_level = 1100;
+	optional int64 new_character_xp_on_level = 1200;
+	optional int64 skill_bonus_exp = 1300;
+}
+
+message ItemComsumption {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.VitalAmount vital_stack_applied = 200;
+	optional .s6.palia.telem.VitalAmount vital_stack_gained = 300;
+	optional .s6.palia.telem.PlayerBuffs buffs_gained = 400;
+	optional .s6.palia.telem.ItemStack item_stack_lost = 500;
+}
+
+message PlayerDataCorrection {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional int64 correction_id = 200;
+}

@@ -1,0 +1,159 @@
+package s6.discord.telem.paliabot.v2;
+
+message PresenceUpdate {
+	optional uint64 guildId = 1;
+	optional .s6.discord.telem.paliabot.v2.Presence presence = 2;
+}
+
+message User {
+	optional uint64 id = 1;
+	optional bool bot = 2;
+	optional uint32 discriminator = 3;
+	optional string name = 4;
+	optional uint32 publicFlags = 5;
+	optional string avatar = 6;
+}
+
+message ActivityAssets {
+	optional string largeImage = 1;
+	optional string largeText = 2;
+	optional string smallImage = 3;
+	optional string smallText = 4;
+}
+
+message ActivityParty {
+	optional string id = 1;
+	optional uint64 currentSize = 2;
+	optional uint64 maxSize = 3;
+}
+
+message ActivityEmoji {
+	optional string name = 1;
+	optional uint64 id = 2;
+	optional bool animated = 3;
+}
+
+message ActivityTimestamps {
+	optional uint64 start = 1;
+	optional uint64 end = 2;
+}
+
+message ActivityButton {
+	optional string label = 1;
+	optional string url = 2;
+}
+
+message Activity {
+	optional uint64 applicationId = 1;
+	optional .s6.discord.telem.paliabot.v2.ActivityAssets assets = 2;
+	optional string details = 3;
+	optional uint64 flags = 4;
+	optional bool instance = 5;
+	optional uint32 kind = 6;
+	optional string name = 7;
+	optional .s6.discord.telem.paliabot.v2.ActivityParty party = 8;
+	optional string state = 9;
+	optional string url = 12;
+	repeated .s6.discord.telem.paliabot.v2.ActivityButton buttons = 13;
+}
+
+message ClientStatus {
+	optional string desktop = 1;
+	optional string mobile = 2;
+	optional string web = 3;
+}
+
+message Presence {
+	repeated .s6.discord.telem.paliabot.v2.Activity activities = 1;
+	optional .s6.discord.telem.paliabot.v2.ClientStatus clientStatus = 2;
+	optional uint64 lastModified = 3;
+	optional string status = 4;
+	optional uint64 userId = 5;
+	optional .s6.discord.telem.paliabot.v2.User user = 6;
+}
+
+message ChatMessage {
+	optional uint64 id = 1;
+	optional .s6.discord.telem.paliabot.v2.User author = 2;
+	optional uint64 channelId = 3;
+	optional string content = 4;
+	optional uint64 editedTimestamp = 5;
+	optional uint64 guildId = 6;
+	optional uint32 kind = 7;
+	optional .s6.discord.telem.paliabot.v2.PartialMember member = 8;
+	optional bool mentionEveryone = 9;
+	repeated uint64 mentionRoles = 10;
+	repeated .s6.discord.telem.paliabot.v2.ChannelMention mentionChannels = 11;
+	optional bool pinned = 12;
+	repeated .s6.discord.telem.paliabot.v2.MessageReaction reactions = 13;
+	optional uint64 timestamp = 14;
+	optional bool tts = 15;
+	optional uint64 webhookId = 16;
+	optional .s6.discord.telem.paliabot.v2.MessageActivity activity = 17;
+	optional .s6.discord.telem.paliabot.v2.MessageApplication application = 18;
+	optional .s6.discord.telem.paliabot.v2.MessageReference messageReference = 19;
+	optional uint64 flags = 20;
+	optional string nonce = 22;
+	optional .s6.discord.telem.paliabot.v2.ReferencedMessage referencedMessage = 23;
+}
+
+message PartialMember {
+	optional bool deaf = 1;
+	optional uint64 joinedAt = 2;
+	optional bool mute = 3;
+	optional string nick = 4;
+	repeated uint64 roleIds = 5;
+	optional bool pending = 6;
+	optional uint64 premiumSince = 7;
+	optional uint64 guildId = 8;
+	optional .s6.discord.telem.paliabot.v2.User user = 9;
+}
+
+message ChannelMention {
+	optional uint64 id = 1;
+	optional uint64 guildId = 2;
+	optional string kind = 3;
+	optional string name = 4;
+}
+
+message MessageReaction {
+	optional uint64 count = 1;
+	optional bool me = 2;
+	optional string unicode = 3;
+	optional bool animated = 4;
+	optional uint64 emojiId = 5;
+	optional string name = 6;
+}
+
+message MessageActivity {
+	optional uint32 kind = 1;
+	optional string partyId = 2;
+}
+
+message MessageApplication {
+	optional uint64 id = 1;
+	optional string coverImage = 2;
+	optional string description = 3;
+	optional string icon = 4;
+	optional string name = 5;
+}
+
+message MessageReference {
+	optional uint64 messageId = 1;
+	optional uint64 channelId = 2;
+	optional uint64 guildId = 3;
+}
+
+message ReferencedMessage {
+	optional uint64 id = 1;
+	optional .s6.discord.telem.paliabot.v2.User author = 2;
+	optional uint64 channelId = 3;
+	optional string content = 4;
+	optional uint64 editedTimestamp = 5;
+	optional uint64 guildId = 6;
+	optional uint32 kind = 7;
+	optional .s6.discord.telem.paliabot.v2.PartialMember member = 8;
+	optional bool mentionEveryone = 9;
+	optional uint64 timestamp = 14;
+	optional bool tts = 15;
+}

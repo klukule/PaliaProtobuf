@@ -1,0 +1,32 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.limitedevent.v0;
+
+message MinigameResult {
+	message ResultMetadataEntry {
+		optional string key = 1;
+		optional string value = 2;
+	}
+
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional string minigame_name = 300;
+	optional uint64 minigame_start_timestamp = 400;
+	optional float score = 500;
+	repeated .s6.palia.telem.limitedevent.v0.MinigameResult.ResultMetadataEntry result_metadata = 600;
+}
+
+message EventAreaEntry {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.LimitedEventId limited_event_unique_id = 300;
+}
+
+message EventAreaExit {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.LimitedEventId limited_event_unique_id = 300;
+}

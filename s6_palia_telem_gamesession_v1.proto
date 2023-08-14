@@ -1,0 +1,102 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.gamesession.v1;
+
+enum GraphicsQualityLevel {
+	UNKNOWN_QUALITY = 0;
+	CUSTOM = 1;
+	LOW = 2;
+	MEDIUM = 3;
+	HIGH = 4;
+	EPIC = 5;
+	CINEMATIC = 6;
+}
+
+enum SprintType {
+	UNKNOWN_SPRINT_TYPE = 0;
+	HOLD_TO_SPRINT = 1;
+	TAP_TO_SPRINT = 2;
+	TOGGLE_SPRINT = 3;
+}
+
+enum MapTravelReason {
+	MAP_TRAVEL_UNKNOWN = 0;
+	MAP_TRAVEL_PORTAL = 1;
+	MAP_TRAVEL_STABLES = 2;
+	MAP_TRAVEL_HOUSE = 3;
+	MAP_TRAVEL_LOBBY = 4;
+	MAP_TRAVEL_CHEATS = 5;
+}
+
+message PlayerLocation {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+}
+
+message GraphicsSettings {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional bool was_changed_by_player = 150;
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel quality_preset = 200 [default = UNKNOWN_QUALITY];
+	optional float resolution_scale_percent = 300;
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel view_distance = 400 [default = UNKNOWN_QUALITY];
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel shadows = 500 [default = UNKNOWN_QUALITY];
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel anti_aliasing = 600 [default = UNKNOWN_QUALITY];
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel textures = 700 [default = UNKNOWN_QUALITY];
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel effects = 800 [default = UNKNOWN_QUALITY];
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel postprocessing = 900 [default = UNKNOWN_QUALITY];
+	optional .s6.palia.telem.gamesession.v1.GraphicsQualityLevel foliage = 1000 [default = UNKNOWN_QUALITY];
+	optional int32 window_resolution_width = 1100;
+	optional int32 window_resolution_height = 1200;
+	optional float framerate_limit = 1300;
+	optional bool vsync_enabled = 1400;
+	optional bool dynamic_resolution_enabled = 1500;
+	optional bool hdr_enabled = 1600;
+}
+
+message GameSettings {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional bool add_tools_to_action_bar = 200;
+	optional int32 bag_rows_in_action_bar = 300;
+	optional bool hide_chat_timestamp = 400;
+	optional string language = 500;
+	optional bool enable_first_time_hints = 600;
+	optional bool center_screen_reticle = 700;
+	optional bool x_axis_inversion = 800;
+	optional bool y_axis_inversion = 900;
+	optional float mouse_sensitivity = 1000;
+	optional bool camera_shake_off = 1100;
+	optional .s6.palia.telem.gamesession.v1.SprintType sprint_type = 1200 [default = UNKNOWN_SPRINT_TYPE];
+	optional bool allow_eating_when_full = 1300;
+	optional bool show_server_ping = 1400;
+	optional bool enable_action_bar_wrapping = 1500;
+}
+
+message MapTravelLoadTimes {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional int64 start_time = 100;
+	optional int64 end_time = 200;
+	optional string start_map = 300;
+	optional string end_map = 400;
+	optional .s6.palia.telem.gamesession.v1.MapTravelReason travel_reason = 500 [default = MAP_TRAVEL_UNKNOWN];
+}
+
+message PlayerTraversal {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional int64 idle_time = 300;
+	optional int64 walk_time = 400;
+	optional int64 run_time = 500;
+	optional int64 sprint_time = 600;
+	optional int64 climb_time = 700;
+	optional int64 glide_time = 800;
+}
+
+message KickPlayer {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string kick_reason = 200;
+}

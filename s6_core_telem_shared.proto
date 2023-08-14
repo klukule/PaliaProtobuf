@@ -1,0 +1,17 @@
+package s6.core.telem;
+
+message NullableInt {
+	optional int64 value = 1;
+}
+
+message NullableUInt {
+	optional uint64 value = 1;
+}
+
+message NullableFloat {
+	optional float value = 1;
+}
+
+message NullableString {
+	optional string value = 1;
+}

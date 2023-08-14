@@ -1,0 +1,13 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.storage.v1;
+
+message StorageSnapshot {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	repeated .s6.palia.telem.storage.v1.StoragePool storage_pools = 100;
+}
+
+message StoragePool {
+	optional string storage_type = 100;
+	repeated .s6.palia.telem.ItemStack item_stacks = 200;
+}

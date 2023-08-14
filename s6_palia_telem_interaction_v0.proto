@@ -1,0 +1,11 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.interaction.v0;
+
+message InteractableUse {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional .s6.palia.telem.InstanceLocation instance_location = 200;
+	optional .s6.palia.telem.LimitedEventId limited_event_unique_id = 300;
+	optional string interactable_name = 400;
+}

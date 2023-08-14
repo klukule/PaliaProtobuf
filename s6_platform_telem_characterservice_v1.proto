@@ -1,0 +1,121 @@
+package s6.platform.telem.characterservice.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+	UNAVAILABLE = 2;
+	BAD_FORMAT = 3;
+	CENSORED = 4;
+	INVALID = 5;
+}
+
+message Loadout {
+	message OptionsEntry {
+		optional string key = 1;
+		optional .s6.platform.telem.characterservice.v1.CustomizationOption value = 2;
+	}
+
+	optional string loadout_id = 100;
+	optional string name = 200;
+	repeated .s6.platform.telem.characterservice.v1.Loadout.OptionsEntry options = 300;
+}
+
+message CharacterCreate {
+	message OptionsEntry {
+		optional string key = 1;
+		optional .s6.platform.telem.characterservice.v1.CustomizationOption value = 2;
+	}
+
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+	optional string character_name = 400;
+	repeated .s6.platform.telem.characterservice.v1.CharacterCreate.OptionsEntry options = 500;
+	optional .s6.platform.telem.characterservice.v1.Loadout loadout = 600;
+}
+
+message CharacterDelete {
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+}
+
+message UpdateName {
+	optional string character_name = 100;
+	optional string previous_character_name = 200;
+}
+
+message UpdateCurrentLoadout {
+	optional string loadout_id = 100;
+}
+
+message UpdateCustomizationOption {
+	message OptionsEntry {
+		optional string key = 1;
+		optional .s6.platform.telem.characterservice.v1.CustomizationOption value = 2;
+	}
+
+	repeated .s6.platform.telem.characterservice.v1.UpdateCustomizationOption.OptionsEntry options = 100;
+}
+
+message UpdateWrapper {
+	oneof update {
+		.s6.platform.telem.characterservice.v1.UpdateName name = 100;
+		.s6.platform.telem.characterservice.v1.UpdateCurrentLoadout loadout = 200;
+		.s6.platform.telem.characterservice.v1.UpdateCustomizationOption options = 300;
+	}
+}
+
+message CharacterUpdate {
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+	repeated .s6.platform.telem.characterservice.v1.UpdateWrapper updates = 400;
+}
+
+message CustomizationOption {
+	message VariantEntry {
+		optional string key = 1;
+		optional string value = 2;
+	}
+
+	optional string id = 100;
+	repeated .s6.platform.telem.characterservice.v1.CustomizationOption.VariantEntry variant = 200;
+}
+
+message CreateLoadout {
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+	optional .s6.platform.telem.characterservice.v1.Loadout loadout = 400;
+	optional bool set_current = 500;
+}
+
+message UpdateLoadout {
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+	optional .s6.platform.telem.characterservice.v1.Loadout original_loadout = 400;
+	optional .s6.platform.telem.characterservice.v1.Loadout loadout = 500;
+	optional bool set_current = 600;
+}
+
+message DeleteLoadout {
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+	optional string loadout_id = 400;
+}
+
+message NameUpdate {
+	option deprecated = true;
+
+	optional .s6.platform.telem.characterservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string character_id = 300;
+	optional string character_name = 400;
+
+	oneof _previous_character_name {
+		string previous_character_name = 500;
+	}
+}

@@ -1,0 +1,25 @@
+package s6.platform.telem.friendservice.v1;
+
+enum RequestState {
+	ERRORED = 0;
+	SUCCESS = 1;
+	BLOCKED = 2;
+}
+
+enum InviteState {
+	Created = 0;
+	Accepted = 1;
+}
+
+message AddFriend {
+	optional .s6.platform.telem.friendservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string friend_account_id = 300;
+	optional .s6.platform.telem.friendservice.v1.InviteState invite_state = 400 [default = Created];
+}
+
+message RemoveFriend {
+	optional .s6.platform.telem.friendservice.v1.RequestState request_state = 100 [default = ERRORED];
+	optional string account_id = 200;
+	optional string friend_account_id = 300;
+}

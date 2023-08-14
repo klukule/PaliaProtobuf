@@ -1,0 +1,12 @@
+import "s6_palia_telem_shared.proto";
+
+package s6.palia.telem.shrine.v1;
+
+message ShrineUse {
+	optional .s6.palia.telem.PaliaServerEventIdentifier event_identity = 1;
+	optional .s6.palia.telem.LevelLocation location = 100;
+	optional string shrine = 200;
+	optional .s6.palia.telem.VitalAmount vital_stack_used = 300;
+	optional int64 previous_state = 400;
+	optional int64 new_state = 500;
+}
