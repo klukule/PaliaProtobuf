@@ -11,6 +11,8 @@ enum ProducerEnv {
 	UNKNOWN_PRODUCER_ENV = 0;
 	DEV = 1;
 	LIVE = 2;
+	STG = 3;
+	PROD = 4;
 }
 
 enum ProducerAgentType {
@@ -19,9 +21,9 @@ enum ProducerAgentType {
 	GAME_CLIENT_IOS = 2;
 	GAME_CLIENT_ANDROID = 3;
 	GAME_SERVER_GAME = 4;
-	GAME_SERVER_META = 5;
 	DATA_PLATFORM_SERVER = 6;
 	GAME_CLIENT_SWITCH = 7;
+	BACKEND_SERVICE = 8;
 }
 
 message EmptyResponse {
@@ -36,6 +38,9 @@ message ProducerAgent {
 	optional .s6.data.ingestservice.v1.ProducerAgentType agent_type = 1 [default = UNKNOWN_PRODUCER_AGENT];
 	optional string agent_version = 2;
 	optional string comment = 3;
+	optional string name = 4;
+	optional string environment = 5;
+	optional string region = 6;
 }
 
 message Envelope {
